@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+    background: linear-gradient(-45deg, #ffd943, #d7cc8d, #208cff, #6fafd3);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80%;
+    margin: 40px auto;
+    align-items: center;
+  }
+
+h1 {
+    text-align: center;
+}
+
+input[type="text"] {
+    width: calc(100% - 130px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+h1 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    color: rgb(255, 255, 254);
+    
+}
+
+button {
+    padding: 10px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0057b3;
+}
+
+.filters {
+    margin: 20px 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    
+}
+
+li {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    border-radius:10px ;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+#filterAll,  #filterCompleted, #filterPending {
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.605);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.291); 
+}
+#addTaskButton {
+    cursor: pointer;
+    margin-left: 5px;
+    transition: transform 0.1s ease;
+}
+
+#addTaskButton:active {
+    transform: scale(0.9);
+}
+
+
+#filterAll:hover {
+    background-color: #fdd05eb6;
+    font-family: "Montserrat", sans-serif;
+}
+
+#filterCompleted:hover {
+    background-color: #fdd05eb6;
+    font-family: "Montserrat", sans-serif;
+}
+
+#filterPending:hover {
+    background-color: #fdd05eb6;
+    font-family: "Montserrat", sans-serif;
+}
+
+#taskInput {
+    background-color: rgb(195, 208, 216);
+    border-color: rgb(195, 208, 216);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.291);
+}
+
+#taskInput:focus {
+    border: 2px solid rgb(195, 208, 216);
+    outline: none;
+}
+
+
+
+.completed{
+    color: rgb(94, 94, 94);
+    font-family: "Montserrat", sans-serif;
+}
+
+.botao-editar, .botao-concluir, .botao-remover {
+    border-radius: 10px;
+    background-color: #1672db00;
+    color: black;
+}
+
+.botao-editar:hover {
+    background-color: #fdd05eb6;
+}
+
+.botao-concluir:hover {
+    background-color: #fdd05eb6;
+}
+.botao-remover:hover {
+    background-color: #fdd05eb6;
+    color: rgb(31, 31, 31);
+}
+
+.cabecalho-titulo {
+    background: linear-gradient(-45deg, #ffd943, #d7cc8d, #5ca6f4, #6fafd3);
+    padding: 2px;
+    border-radius: 30px;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.291);
+}
+
+
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.8s ease, box-shadow 0.3s ease;
+    transform: scale(1); 
+}
+
+
+.container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+}
+
+
+
+.botao {
+    
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.botao:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+
+.input-container {
+    display: flex;
+    align-items: center; 
+    font-family: "Montserrat", sans-serif;
+}
+
+.input-container input {
+    flex: 1;
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 50px; 
+    margin-right: 10px;
+    font-family: "Montserrat", sans-serif;
+    
+}
+
+.input-container {
+    position: relative;
+  }
+  
+  #taskInput {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+  }
+  
+  .efeito-bolha {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    background-color: #007bff;
+    border-radius: 50%;
+    animation: bolha-efeito 1.5s ease;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  @keyframes bolha-efeito {
+    0% {
+      width: 0;
+      height: 0;
+    }
+    100% {
+      width: 200px;
+      height: 200px;
+      opacity: 0;
+    }
+
+    
+}
+
+@media (max-width: 768px) {
+    .container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80%;
+    margin: 40px auto;
+    align-items: center;
+    font-size: 15px;
+  }
+
+  #filterAll,  #filterCompleted, #filterPending {
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.605);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.291); 
+
+}
+
+
+}
+
+@media (max-width: 812px) {
+    .container {
+    background-color:  rgba(255, 255, 255, 0.8);
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80%;
+    margin: 40px auto;
+    align-items: center;
+  }
+
+  #filterAll,  #filterCompleted, #filterPending {
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.605);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.291); 
+    
+}
+}
+
+
+
+    </style>
+
+    <div class="container">
+        <div class="cabecalho-titulo">
+            <h1>Lista de Tarefas</h1>
+        </div>
+        <br><br>
+        <div class="input-container">
+            <input type="text" id="taskInput" placeholder="Digite uma nova tarefa...">
+            <img id="addTaskButton" src="./imagens/adicionar-produto.png" alt="Adicionar" width="30" height="30">
+        </div>
+<div class="filters">
+    <button id="filterAll" class="botao">Todas</button>
+    <button id="filterCompleted" class="botao">Concluídas</button>
+    <button id="filterPending" class="botao">Pendentes</button>
+</div>
+
+        <ul id="taskList"></ul>
+     </div>
+     
+    
+        <ul id="taskList"></ul>
+    <script>document.addEventListener('DOMContentLoaded', () => {
+        const taskInput = document.getElementById('taskInput');
+        const addTaskButton = document.getElementById('addTaskButton');
+        const taskList = document.getElementById('taskList');
+        const filterAll = document.getElementById('filterAll');
+        const filterCompleted = document.getElementById('filterCompleted');
+        const filterPending = document.getElementById('filterPending');
+    
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    
+        function renderTasks(filter = 'all') {
+            taskList.innerHTML = '';
+            const filteredTasks = tasks.filter(task => {
+                if (filter === 'completed') return task.completed;
+                if (filter === 'pending') return !task.completed;
+                return true;
+            });
+    
+            filteredTasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span class="${task.completed ? 'completed' : ''}">${task.text}</span>
+                    <div>
+                        <!-- Botão Concluir ou Desmarcar -->
+                        <button class="botao botao-concluir" title="${task.completed ? 'Desmarcar tarefa' : 'Concluir tarefa'}" onclick="toggleComplete(${index})">
+                            <img src="${task.completed ? './imagens/retirar.png' : './imagens/verificar.png'}" 
+                                 width="20px" height="20px" alt="${task.completed ? 'Desmarcar' : 'Concluir'}">
+                        </button>
+                        
+                        <!-- Botão Editar -->
+                        <button class="botao botao-editar" title="Editar tarefa" onclick="editTask(${index})">
+                            <img src="./imagens/editar.png" width="20px" height="20px" alt="Editar">
+                        </button>
+                        
+                        <!-- Botão Remover -->
+                        <button class="botao botao-remover" title="Remover tarefa" onclick="removeTask(${index})">
+                            <img src="./imagens/lixeira-de-reciclagem.png" width="20px" height="20px" alt="Remover">
+                        </button>
+                    </div>
+                `;
+                
+                taskList.appendChild(li);
+            });
+            
+            
+            
+            
+        }
+    
+        window.toggleComplete = (index) => {
+            tasks[index].completed = !tasks[index].completed;
+            saveTasks();
+            renderTasks();
+        };
+    
+        window.editTask = (index) => {
+            const newText = prompt('Editar tarefa:', tasks[index].text);
+            if (newText) {
+                tasks[index].text = newText;
+                saveTasks();
+                renderTasks();
+            }
+        };
+    
+        window.removeTask = (index) => {
+            tasks.splice(index, 1);
+            saveTasks();
+            renderTasks();
+        };
+    
+        function saveTasks() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+    
+        addTaskButton.addEventListener('click', () => {
+            const taskText = taskInput.value.trim();
+            if (taskText) {
+                tasks.push({ text: taskText, completed: false });
+                taskInput.value = '';
+                saveTasks();
+                renderTasks();
+            }
+        });
+    
+        filterAll.addEventListener('click', () => renderTasks('all'));
+        filterCompleted.addEventListener('click', () => renderTasks('completed'));
+        filterPending.addEventListener('click', () => renderTasks('pending'));
+    
+        renderTasks();
+    });
+    
+    
+    const input = document.getElementById('taskInput');
+    
+    input.addEventListener('click', () => {
+      const bolha = document.createElement('span');
+      bolha.classList.add('efeito-bolha');
+      input.parentNode.appendChild(bolha);
+      
+      setTimeout(() => {
+        bolha.remove();
+      }, 1500);
+    });
+    </script>
+</body>
+</html>
